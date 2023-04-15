@@ -6,6 +6,7 @@
 | full access   | give all plugin permissions        | floatychat.*          |-|
 | localchat     | give permission to use local chat  | floatychat.localchat  |+|
 | globalchat    | give permission to use global chat | floatychat.globalchat |+|
+| /msg          | give permission to sending private messages| floatychat.privatemessage|+|
 
 
 ## Configure config
@@ -20,6 +21,7 @@ plugin/FloatyChat/config.yaml
 |globalChatByDefault| boolean | enable global chat for all players bypassing LuckPerms|
 | globalChatPrefix  | string  | global message chat prefix|
 | localChatPrefix   | string  | local message chat prefix|
+| privateMessageByDefault| boolean| enable private message for all players bypassing LuckPerms |
 
 
 
