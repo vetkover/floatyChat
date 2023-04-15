@@ -1,0 +1,15 @@
+name: floatyChat
+version: '${project.version}'
+main: me.vetkover.floatychat.FloatyChat
+api-version: 1.19
+
+description: plugin for displaying suspected or confirmed players killers
+
+commands:
+  setmurder:
+    description: set murderer status for user;
+    usage: /setmurder <nickname> <status(SUS, Murder)>
+
+  clearmurder:
+    description: clear murderer status for user;
+    usage: /clearmurder <nickname>
