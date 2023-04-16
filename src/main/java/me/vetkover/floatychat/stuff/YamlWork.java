@@ -24,6 +24,7 @@ public class YamlWork {
 
             writer.write("#if something is broken just delete the file :3'\n");
             writer.write("enableGreeting: true \n");
+            writer.write("enableFirstGreeting: true \n");
             writer.write("localChatByDefault: true\n");
             writer.write("globalChatByDefault: true\n");
             writer.write("privateMessageByDefault: true\n");
@@ -31,7 +32,8 @@ public class YamlWork {
             writer.write("globalChatSymbol: !\n");
             writer.write("globalChatPrefix: Global\n");
             writer.write("localChatPrefix: Local\n");
-            writer.write("greetingMessage: welcome back {nickname}, now on server {time}.See you on our site {URL:?text=click?url=https://examplesite.com}!\n");
+            writer.write("greetingMessage: welcome back {nickname1}, now on server {time}.See ya on our site {URL:?text=click?url=https://examplesite.com}!\n");
+            writer.write("firstGreetingMessage: welcome {nickname1}, now on server {time}. Check our site {URL:?text=click?url=https://examplesite.com}!\n");
 
             writer.close();
         } catch (IOException e) {
