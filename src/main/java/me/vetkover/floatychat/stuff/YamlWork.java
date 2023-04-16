@@ -32,8 +32,8 @@ public class YamlWork {
             writer.write("globalChatSymbol: !\n");
             writer.write("globalChatPrefix: Global\n");
             writer.write("localChatPrefix: Local\n");
-            writer.write("greetingMessage: welcome back {nickname1}, now on server {time}.See ya on our site {URL:?text=click?url=https://examplesite.com}!\n");
-            writer.write("firstGreetingMessage: welcome {nickname1}, now on server {time}. Check our site {URL:?text=click?url=https://examplesite.com}!\n");
+            writer.write("greetingMessage: welcome back §6{nickname1}§f, now on server {time:?format=h:mm a}. See ya on our site {URL:?text=click?url=https://sitexample.com}!\n");
+            writer.write("welcome {nickname1}, now on server {time}. Check our site {URL:?text=click?url=https://sitexample.com}\n");
 
             writer.close();
         } catch (IOException e) {
@@ -57,23 +57,41 @@ public class YamlWork {
         return null;
     }
 
+
+
     public static void formatingYaml(Player player1, Object stringYaml) {
+        String Yaml = stringYaml.toString();
         String nickname = player1.getPlayer().getName();
         Date now = new Date();
+
         SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
         String time = sdf.format(now);
 
 
-
-        Object YAMLMessage = stringYaml.toString()
+        String YAMLMessage = Yaml
                 .replaceAll("\\{nickname1\\}", nickname)
                 .replaceAll("\\{time\\}", time)
+                .replaceAll("\\{time:\\?format=([^}]+).", "{TIMEWARP}")
                 .replaceAll("\\{URL:\\?[^}]*text=([^}|?]+)\\?*url=([^}|?]+)}", "{URLWARP}");
 
-        if (YAMLMessage.toString().contains("{URLWARP}")) {
+        if(YAMLMessage.contains("{TIMEWARP}")){
+            Pattern pattern = Pattern.compile("\\{time:\\?format=([^}]+).");
+
+            Matcher matcher = pattern.matcher(Yaml);
+            Boolean urlPaternInString = matcher.find();
+
+            String TIMEformat = matcher.group(1);
+            SimpleDateFormat timeFormat = new SimpleDateFormat(TIMEformat);
+            String Newtime = timeFormat.format(now);
+            YAMLMessage = YAMLMessage.replaceAll("\\{TIMEWARP\\}", Newtime);
+            Yaml = Yaml.replaceAll("\\{time:\\?format=([^}]+).", Newtime);
+
+        }
+
+        if (YAMLMessage.contains("{URLWARP}")) {
             Pattern pattern = Pattern.compile("\\{URL:\\?[^}]*text=([^}|?]+)\\?*url=([^}|?]+)}");
 
-            Matcher matcher = pattern.matcher(stringYaml.toString());
+            Matcher matcher = pattern.matcher(Yaml);
             Boolean urlPaternInString = matcher.find();
 
             String URLtext = matcher.group(1);
@@ -94,9 +112,7 @@ public class YamlWork {
 
             player1.spigot().sendMessage(finalMessage);
         } else {
-            player1.sendMessage(YAMLMessage.toString().trim());
+            player1.sendMessage(YAMLMessage);
         }
-
-
     }
 }

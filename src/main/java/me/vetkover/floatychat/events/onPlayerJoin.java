@@ -31,5 +31,7 @@ public class onPlayerJoin implements Listener {
         } else if (userJSON != null && (boolean) readYaml("enableGreeting")){
             YamlWork.formatingYaml(player1, readYaml("greetingMessage"));
         }
+        event.setJoinMessage(null);
     }
+
 }
