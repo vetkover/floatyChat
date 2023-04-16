@@ -59,7 +59,7 @@ input<= welcome back {nickname}, now on server {time}.See you on our site {URL:?
 
 output=> welcome back DOKOASHI, now on server 7:20 PM, See you on our site click!
 
-firstGreetingMessage   example:
+__ firstGreetingMessage__ example:
 
 input<= welcome  {nickname}, now on server {time:?format=kk:mm}, check our  {URL:?text=site?url=https://examplesite.com}!
 
