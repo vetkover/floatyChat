@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
 import org.yaml.snakeyaml.Yaml;
@@ -25,7 +24,7 @@ public class YamlWork {
 
             writer.write("#if something is broken just delete the file :3'\n");
             writer.write("enableGreeting: true \n");
-            writer.write("welcome back {nickname}, now on server {time}.\\nSee you on our site {URL:?text=click?url=https://examplesite.com}!\n");
+            writer.write("greetingMessage: welcome back {nickname}, now on server {time}.See you on our site {URL:?text=click?url=https://examplesite.com}!\n");
             writer.write("localChatRange: 40\n");
             writer.write("localChatByDefault: true\n");
             writer.write("globalChatByDefault: true\n");
@@ -61,26 +60,23 @@ public class YamlWork {
         SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
         String time = sdf.format(now);
 
-        Pattern pattern = Pattern.compile("\\{URL:\\?[^}]*text=([^}|?]+)\\?*url=([^}|?]+)}");
 
-        Matcher matcher = pattern.matcher(stringYaml.toString());
-        Boolean urlPaternInString = matcher.find();
 
-        String URLtext = matcher.group(1);
-        String URLurl = matcher.group(2);
-
-        if (urlPaternInString) {
-            URLtext = matcher.group(1);
-            URLurl = matcher.group(2);
-        }
-
-        Object greetingMessage = stringYaml.toString()
+        Object YAMLMessage = stringYaml.toString()
                 .replaceAll("\\{nickname\\}", nickname)
                 .replaceAll("\\{time\\}", time)
                 .replaceAll("\\{URL:\\?[^}]*text=([^}|?]+)\\?*url=([^}|?]+)}", "{URLWARP}");
 
-        if (greetingMessage.toString().contains("{URLWARP}")) {
-            String[] parts = greetingMessage.toString().split("\\{URLWARP\\}", 2);
+        if (YAMLMessage.toString().contains("{URLWARP}")) {
+            Pattern pattern = Pattern.compile("\\{URL:\\?[^}]*text=([^}|?]+)\\?*url=([^}|?]+)}");
+
+            Matcher matcher = pattern.matcher(stringYaml.toString());
+            Boolean urlPaternInString = matcher.find();
+
+            String URLtext = matcher.group(1);
+            String URLurl = matcher.group(2);
+
+            String[] parts = YAMLMessage.toString().split("\\{URLWARP\\}", 2);
 
             TextComponent link = new TextComponent(URLtext);
             link.setColor(ChatColor.GREEN);
@@ -95,7 +91,7 @@ public class YamlWork {
 
             player1.spigot().sendMessage(finalMessage);
         } else {
-            player1.sendMessage(greetingMessage.toString().trim());
+            player1.sendMessage(YAMLMessage.toString().trim());
         }
 
 
