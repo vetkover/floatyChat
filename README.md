@@ -14,7 +14,7 @@ plugin/FloatyChat/config.yaml
 
 |parameter|data type|Usage|
 |---------|---------|-|
-| enableGreeting    | boolean | enable welcome message on entry | 
+| enableGreeting    | boolean | enable welcome message on entry |
 | greetingMessage   | string  | text of welcome message on entry |
 | localChatRange    | int     | value of local chat coverage distance |
 | localChatByDefault| boolean | enable local chat for all players bypassing LuckPerms|
@@ -24,7 +24,19 @@ plugin/FloatyChat/config.yaml
 | privateMessageByDefault| boolean| enable private message for all players bypassing LuckPerms |
 
 
+## formatting in config messages
+*messages may support some formatting to create a customized message to your liking.
 
 
+{nickname1} - event user1 nickname
+
+{time} - server time in h:mm a formatting
+
+{URL:?text=?url=} - allows you to embed a link in a message **only once**
 
 
+__greetingMessage__ example:
+
+input<= welcome back {nickname}, now on server {time}.See you on our site {URL:?text=click?url=https://examplesite.com}!
+
+output=> welcome back DOKOASHI, now on server 7:20 PM, See you on our site click!

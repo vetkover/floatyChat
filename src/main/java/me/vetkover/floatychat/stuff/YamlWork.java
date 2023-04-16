@@ -24,14 +24,15 @@ public class YamlWork {
 
             writer.write("#if something is broken just delete the file :3'\n");
             writer.write("enableGreeting: true \n");
-            writer.write("greetingMessage: welcome back {nickname}, now on server {time}.See you on our site {URL:?text=click?url=https://examplesite.com}!\n");
-            writer.write("localChatRange: 40\n");
             writer.write("localChatByDefault: true\n");
             writer.write("globalChatByDefault: true\n");
+            writer.write("privateMessageByDefault: true\n");
+            writer.write("localChatRange: 40\n");
             writer.write("globalChatSymbol: !\n");
             writer.write("globalChatPrefix: Global\n");
             writer.write("localChatPrefix: Local\n");
-            writer.write("privateMessageByDefault: true\n");
+            writer.write("greetingMessage: welcome back {nickname}, now on server {time}.See you on our site {URL:?text=click?url=https://examplesite.com}!\n");
+
             writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -63,7 +64,7 @@ public class YamlWork {
 
 
         Object YAMLMessage = stringYaml.toString()
-                .replaceAll("\\{nickname\\}", nickname)
+                .replaceAll("\\{nickname1\\}", nickname)
                 .replaceAll("\\{time\\}", time)
                 .replaceAll("\\{URL:\\?[^}]*text=([^}|?]+)\\?*url=([^}|?]+)}", "{URLWARP}");
 
