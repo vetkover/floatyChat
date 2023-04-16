@@ -1,11 +1,11 @@
 package me.vetkover.floatychat.events;
 
+import me.vetkover.floatychat.stuff.YamlWork;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import static me.vetkover.floatychat.stuff.YamlWork.formatingYaml;
 import static me.vetkover.floatychat.stuff.YamlWork.readYaml;
 
 public class onPlayerJoin implements Listener {
@@ -14,13 +14,8 @@ public class onPlayerJoin implements Listener {
         Player player = Bukkit.getPlayer(nickname);
         //JSONObject userJSON = JsonWork.findOneJson(nickname);
 
-        String str = formatingYaml(player, readYaml("greetingMessage"));
-        int time = 15;
+        YamlWork.formatingYaml(player, readYaml("greetingMessage"));
 
-        String greetingMessage = str
-                .replaceAll("\\{nickname\\}", nickname)
-                .replaceAll("\\{time\\}", String.valueOf(time));
-        player.sendMessage(greetingMessage);
 
     }
 }
