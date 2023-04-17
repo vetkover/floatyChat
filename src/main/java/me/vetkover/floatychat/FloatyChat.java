@@ -1,6 +1,7 @@
 package me.vetkover.floatychat;
 
 import me.vetkover.floatychat.commands.msg;
+import me.vetkover.floatychat.commands.mute;
 import me.vetkover.floatychat.events.Events;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,6 +17,7 @@ public final class FloatyChat extends JavaPlugin {
         checkFiles();
         Bukkit.getPluginManager().registerEvents(new Events(), this);
         getCommand("msg").setExecutor(new msg());
+        getCommand("mute").setExecutor(new mute());
     }
 
     @Override

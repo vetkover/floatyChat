@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 
+import static me.vetkover.floatychat.stuff.JsonWork.findOneJson;
 import static me.vetkover.floatychat.stuff.YamlWork.readYaml;
 import static me.vetkover.floatychat.stuff.perimssionWork.userHasPermission;
 
@@ -19,27 +20,29 @@ public class msg implements CommandExecutor {
         String senderNickname = player.getName();
         String recipientNickname = strings[0];
         Player recipient = Bukkit.getPlayer(recipientNickname);
+        long currentTimeInSeconds = System.currentTimeMillis() / 1000;
 
-        if (userHasPermission(senderNickname, "floatychat.privatemessage") || (Boolean) readYaml("privateMessageByDefault")){
-            if(recipient != null){
+        if (userHasPermission(senderNickname, "floatychat.privatemessage") || (Boolean) readYaml("privateMessageByDefault")) {
+            if (findOneJson(senderNickname).getInt("mute") < currentTimeInSeconds) {
+                if (recipient != null) {
 
-                String result = "";
+                    String result = "";
 
-                for (int i = 1; i < strings.length; i++) {
-                    result += strings[i] + " ";
+                    for (int i = 1; i < strings.length; i++) {
+                        result += strings[i] + " ";
+                    }
+                    recipient.sendMessage("§9[Private] " + "§f" + senderNickname + "§7 => " + result);
+                    player.sendMessage("§9[Private] " + "§f" + "You" + "§7 => " + result);
+
+                } else {
+                    player.sendMessage("we couldn't send him a message because he doesn't exist");
                 }
-                recipient.sendMessage("§9[Private] " + "§f" + senderNickname + "§7 => " + result);
-                player.sendMessage("§9[Private] " + "§f" + "You" + "§7 => " + result);
-
+            } else {
+                player.sendMessage("you can't write while you're in mute");
             }
-            else {
-                player.sendMessage("we couldn't send him a message because he doesn't exist");
+            } else {
+                player.sendMessage("§4access denied to this command");
             }
-
-        } else{
-            player.sendMessage("§4access denied to this command");
-        }
-
         return true;
     }
 }

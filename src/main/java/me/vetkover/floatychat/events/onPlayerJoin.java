@@ -2,7 +2,6 @@ package me.vetkover.floatychat.events;
 
 import me.vetkover.floatychat.stuff.JsonWork;
 import me.vetkover.floatychat.stuff.YamlWork;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -33,5 +32,4 @@ public class onPlayerJoin implements Listener {
         }
         event.setJoinMessage(null);
     }
-
 }

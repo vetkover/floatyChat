@@ -29,11 +29,12 @@ public class YamlWork {
             writer.write("globalChatByDefault: true\n");
             writer.write("privateMessageByDefault: true\n");
             writer.write("localChatRange: 40\n");
+            writer.write("mutePunish: 3600\n");
             writer.write("globalChatSymbol: !\n");
             writer.write("globalChatPrefix: Global\n");
             writer.write("localChatPrefix: Local\n");
             writer.write("greetingMessage: welcome back §6{nickname1}§f, now on server {time:?format=h:mm a}. See ya on our site {URL:?text=click?url=https://sitexample.com}!\n");
-            writer.write("welcome {nickname1}, now on server {time}. Check our site {URL:?text=click?url=https://sitexample.com}\n");
+            writer.write("firstGreetingMessage: welcome {nickname1}, now on server {time}. Check our site {URL:?text=click?url=https://sitexample.com}\n");
 
             writer.close();
         } catch (IOException e) {

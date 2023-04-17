@@ -7,5 +7,9 @@ description: plugin for displaying suspected or confirmed players killers
 
 commands:
   msg:
-    description: send private message to user;
+    description: send private message to user
     usage: /msg <nickname> <message>
+
+  mute:
+    description: mute a player
+    usage: /mute <nickname> <optional time in seconds>

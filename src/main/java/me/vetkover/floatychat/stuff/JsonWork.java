@@ -106,14 +106,14 @@ public class JsonWork {
             if(!playerFound) {
                 JSONObject obj = new JSONObject();
                 obj.put("player", player);
-                obj.put("muted", punishTime);
+                obj.put("mute", punishTime);
                 obj.put("notFirstEnter", firstEnter);
                 arr.put(obj);
             } else {
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject obj = arr.getJSONObject(i);
                     if (obj.getString("player").equals(player)) {
-                        obj.put("muted", punishTime);
+                        obj.put("mute", punishTime);
                         obj.put("notFirstEnter", firstEnter);
                         break;
                     }
