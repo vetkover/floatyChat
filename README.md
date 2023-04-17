@@ -7,7 +7,7 @@
 | localchat     | give permission to use local chat  | floatychat.localchat  |+|
 | globalchat    | give permission to use global chat | floatychat.globalchat |+|
 | /msg          | give permission to sending private messages| floatychat.privatemessage|+|
-
+ | /mute        | give permission to muted a players | floatychat.mute|-|
 
 ## Configure config
 plugin/FloatyChat/config.yaml
