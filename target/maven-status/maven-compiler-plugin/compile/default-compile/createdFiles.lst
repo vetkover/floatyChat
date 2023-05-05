@@ -4,6 +4,7 @@ me\vetkover\floatychat\events\onPlayerChat.class
 me\vetkover\floatychat\events\Events.class
 me\vetkover\floatychat\FloatyChat.class
 me\vetkover\floatychat\stuff\YamlWork.class
+me\vetkover\floatychat\events\onPlayerDeath.class
 me\vetkover\floatychat\commands\mute.class
 me\vetkover\floatychat\commands\msg.class
 me\vetkover\floatychat\stuff\perimssionWork.class

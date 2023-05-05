@@ -7,7 +7,7 @@
 | localchat     | give permission to use local chat  | floatychat.localchat  |+|
 | globalchat    | give permission to use global chat | floatychat.globalchat |+|
 | /msg          | give permission to sending private messages| floatychat.privatemessage|+|
- | /mute        | give permission to muted a players | floatychat.mute|-|
+| /mute        | give permission to muted a players | floatychat.mute|-|
 
 ## Configure config
 plugin/FloatyChat/config.yaml
@@ -55,12 +55,12 @@ plugin/FloatyChat/config.yaml
 
 __greetingMessage__   example:
 
-input<= welcome back {nickname}, now on server {time}.See you on our site {URL:?text=click?url=https://examplesite.com}!
+input<= welcome back {nickname1}, now on server {time}.See you on our site {URL:?text=click?url=https://examplesite.com}!
 
 output=> welcome back DOKOASHI, now on server 7:20 PM, See you on our site click!
 
 __firstGreetingMessage__ example:
 
-input<= welcome  {nickname}, now on server {time:?format=kk:mm}, check our  {URL:?text=site?url=https://examplesite.com}!
+input<= welcome  {nickname1}, now on server {time:?format=kk:mm}, check our  {URL:?text=site?url=https://examplesite.com}!
 
 output=> welcome back DOKOASHI, now on server 18:20, check our site!

@@ -25,6 +25,7 @@ public class YamlWork {
             writer.write("#if something is broken just delete the file :3'\n");
             writer.write("enableGreeting: true \n");
             writer.write("enableFirstGreeting: true \n");
+            writer.write("enableCustomDeathMessage: true \n");
             writer.write("localChatByDefault: true\n");
             writer.write("globalChatByDefault: true\n");
             writer.write("privateMessageByDefault: true\n");
@@ -35,6 +36,7 @@ public class YamlWork {
             writer.write("localChatPrefix: Local\n");
             writer.write("greetingMessage: welcome back §6{nickname1}§f, now on server {time:?format=h:mm a}. See ya on our site {URL:?text=click?url=https://sitexample.com}!\n");
             writer.write("firstGreetingMessage: welcome {nickname1}, now on server {time}. Check our site {URL:?text=click?url=https://sitexample.com}\n");
+            writer.write("customDeathMessage: {nickname1} killed a {victim} \n");
 
             writer.close();
         } catch (IOException e) {
@@ -62,7 +64,7 @@ public class YamlWork {
 
     public static void formatingYaml(Player player1, Object stringYaml) {
         String Yaml = stringYaml.toString();
-        String nickname = player1.getPlayer().getName();
+        String nickname1 = player1.getPlayer().getName();
         Date now = new Date();
 
         SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
@@ -70,10 +72,11 @@ public class YamlWork {
 
 
         String YAMLMessage = Yaml
-                .replaceAll("\\{nickname1\\}", nickname)
+                .replaceAll("\\{nickname1\\}", nickname1)
                 .replaceAll("\\{time\\}", time)
                 .replaceAll("\\{time:\\?format=([^}]+).", "{TIMEWARP}")
-                .replaceAll("\\{URL:\\?[^}]*text=([^}|?]+)\\?*url=([^}|?]+)}", "{URLWARP}");
+                .replaceAll("\\{URL:\\?[^}]*text=([^}|?]+)\\?*url=([^}|?]+)}", "{URLWARP}")
+                .replaceAll("\\{victim\\}", player1.getKiller().getName());
 
         if(YAMLMessage.contains("{TIMEWARP}")){
             Pattern pattern = Pattern.compile("\\{time:\\?format=([^}]+).");

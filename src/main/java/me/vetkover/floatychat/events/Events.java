@@ -17,4 +17,7 @@ public class Events implements Listener {
     {
         new onPlayerJoin(event);
     }
+
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) { new onPlayerDeath(event);}
 }
