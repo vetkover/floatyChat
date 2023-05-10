@@ -12,6 +12,7 @@ import static me.vetkover.floatychat.stuff.perimssionWork.userHasPermission;
 public class onPlayerChat implements Listener {
     public onPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
+        event.setCancelled(true);
         String message = event.getMessage();
         String author = player.getDisplayName();
         String realName = player.getName();

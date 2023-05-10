@@ -8,16 +8,16 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class Events implements Listener {
     @EventHandler
-    public void onPlayerChat(AsyncPlayerChatEvent event)
-    {
+    public void onPlayerChat(AsyncPlayerChatEvent event){
         new onPlayerChat(event);
     }
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event)
-    {
+    public void onPlayerJoin(PlayerJoinEvent event){
         new onPlayerJoin(event);
     }
 
     @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent event) { new onPlayerDeath(event);}
+    public void onPlayerDeath(PlayerDeathEvent event){
+        new onPlayerDeath(event);
+    }
 }
