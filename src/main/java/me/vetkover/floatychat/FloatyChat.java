@@ -13,6 +13,7 @@ public final class FloatyChat extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        getServer().getPluginManager().registerEvents(new Events(), this);
         checkDirectory();
         checkFiles();
         Bukkit.getPluginManager().registerEvents(new Events(), this);
