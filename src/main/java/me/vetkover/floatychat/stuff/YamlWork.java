@@ -29,20 +29,29 @@ public class YamlWork {
         try {
             FileWriter writer = new FileWriter(configFile);
             writer.write("#if something is broken just delete the file :3'\n");
+
             writer.write("enableGreeting: true \n");
             writer.write("enableFirstGreeting: true \n");
             writer.write("enableCustomDeathMessage: true \n");
+            writer.write("enableTimerMessages: false \n");
+
             writer.write("localChatByDefault: true\n");
             writer.write("globalChatByDefault: true\n");
             writer.write("privateMessageByDefault: true\n");
+
             writer.write("localChatRange: 40\n");
             writer.write("mutePunish: 3600\n");
+
             writer.write("globalChatSymbol: !\n");
             writer.write("globalChatPrefix: Global\n");
             writer.write("localChatPrefix: Local\n");
+
             writer.write("greetingMessage: welcome back §6{nickname1}§f, now on server {time:?format=h:mm a}. See ya on our site {URL:?text=click?url=https://sitexample.com}!\n");
             writer.write("firstGreetingMessage: welcome {nickname1}, now on server {time}. Check our site {URL:?text=click?url=https://sitexample.com}\n");
-            writer.write("customDeathMessage: {nickname1} killed a {victim} \n");
+            writer.write("customDeathMessage: {nickname1} killed a {nickname2}\n");
+
+            writer.write("TimerMessages:\n");
+            writer.write(" - example string 1\n");
             writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -70,22 +79,15 @@ public class YamlWork {
 //
 public static String[] readYamlAdverts() {
     try {
-        // Загрузка YAML-файла
-        InputStream input = Files.newInputStream(Paths.get(appDir + "/plugins/floatyChat/config.yaml"));
 
-        // Создание экземпляра SnakeYAML
+        InputStream input = Files.newInputStream(Paths.get(appDir + "/plugins/floatyChat/config.yaml"));
         Yaml yaml = new Yaml();
 
-        // Чтение YAML-файла в виде Map
         Map<String, Object> data = yaml.load(input);
-
-        // Поиск оглавления по названию ключа
         String targetKey = "TimerMessages";
+
         List<String> content = findContentByKey(data, targetKey);
-
-        // Преобразование списка в массив
         String[] contentArray = content.toArray(new String[0]);
-
         return contentArray;
     } catch (FileNotFoundException e) {
         e.printStackTrace();
@@ -105,10 +107,8 @@ public static String[] readYamlAdverts() {
 
             if (key.equals(targetKey)) {
                 if (value instanceof List) {
-                    // Обработка вложенного списка значений
                     processNestedList((List<?>) value, content);
                 } else {
-                   // System.out.println("list empty");
                 }
                 break;
             }
