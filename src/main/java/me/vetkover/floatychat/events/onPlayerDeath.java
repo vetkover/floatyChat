@@ -5,11 +5,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import static me.vetkover.floatychat.stuff.JsonWork.findOneJson;
 import static me.vetkover.floatychat.stuff.YamlWork.readYaml;
-import static me.vetkover.floatychat.stuff.perimssionWork.userHasPermission;
 
 public class onPlayerDeath implements Listener {
     public onPlayerDeath(PlayerDeathEvent event) {
@@ -18,12 +15,12 @@ public class onPlayerDeath implements Listener {
         Player victim = event.getEntity();
         Player killer = event.getEntity().getKiller();
         String victimNick = event.getEntity().getName();
-        String killerNick = killer.getName();
+        String killerNick = (killer != null) ? killer.getName() : null;
 
         if( (boolean) readYaml("enableCustomDeathMessage") && killer != null){
             event.setDeathMessage(null);
             for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-                YamlWork.formatingYaml(player, readYaml("customDeathMessage"));
+                YamlWork.formatingYaml(player, readYaml("customDeathMessage"), true);
             }
         }
     }

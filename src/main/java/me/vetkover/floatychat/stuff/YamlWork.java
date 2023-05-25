@@ -4,7 +4,9 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,9 +15,14 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.yaml.snakeyaml.Yaml;
-
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 public class YamlWork {
 
     public static void createYaml(File configFile) {
@@ -44,6 +51,8 @@ public class YamlWork {
 
     static String appDir = System.getProperty("user.dir");
 
+
+
     public static Object readYaml(String dataGet) {
 
         Yaml yaml = new Yaml();
@@ -58,11 +67,69 @@ public class YamlWork {
         return null;
     }
 
+//
+public static String[] readYamlAdverts() {
+    try {
+        // Загрузка YAML-файла
+        InputStream input = Files.newInputStream(Paths.get(appDir + "/plugins/floatyChat/config.yaml"));
+
+        // Создание экземпляра SnakeYAML
+        Yaml yaml = new Yaml();
+
+        // Чтение YAML-файла в виде Map
+        Map<String, Object> data = yaml.load(input);
+
+        // Поиск оглавления по названию ключа
+        String targetKey = "TimerMessages";
+        List<String> content = findContentByKey(data, targetKey);
+
+        // Преобразование списка в массив
+        String[] contentArray = content.toArray(new String[0]);
+
+        return contentArray;
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
+    return null;
+}
 
 
-    public static void formatingYaml(Player player1, Object stringYaml) {
+    private static List<String> findContentByKey(Map<String, Object> data, String targetKey) {
+        List<String> content = new ArrayList<>();
+
+        for (Map.Entry<String, Object> entry : data.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+
+            if (key.equals(targetKey)) {
+                if (value instanceof List) {
+                    // Обработка вложенного списка значений
+                    processNestedList((List<?>) value, content);
+                } else {
+                   // System.out.println("list empty");
+                }
+                break;
+            }
+        }
+
+        return content;
+    }
+
+    private static void processNestedList(List<?> list, List<String> content) {
+        for (Object item : list) {
+            if (item instanceof String) {
+                content.add((String) item);
+            }
+        }
+    }
+
+//
+    public static void formatingYaml(Player player1, Object stringYaml, Boolean toAll) {
         String Yaml = stringYaml.toString();
         String nickname1 = player1.getPlayer().getName();
+        String killerName = (player1.getKiller() != null) ? player1.getKiller().getName() : "power of nature";
         Date now = new Date();
 
         SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
@@ -70,11 +137,11 @@ public class YamlWork {
 
 
         String YAMLMessage = Yaml
-                .replaceAll("\\{nickname1\\}", nickname1)
+                .replaceAll("\\{nickname2\\}", killerName)
                 .replaceAll("\\{time\\}", time)
                 .replaceAll("\\{time:\\?format=([^}]+).", "{TIMEWARP}")
                 .replaceAll("\\{URL:\\?[^}]*text=([^}|?]+)\\?*url=([^}|?]+)}", "{URLWARP}")
-                .replaceAll("\\{victim\\}", player1.getKiller() != null ? player1.getKiller().getName() : "unknown");
+                .replaceAll("\\{nickname1\\}", nickname1);
 
         if(YAMLMessage.contains("{TIMEWARP}") || YAMLMessage.contains("{URLWARP}")) {
             if (YAMLMessage.contains("{TIMEWARP}")) {
@@ -116,7 +183,13 @@ public class YamlWork {
                 player1.spigot().sendMessage(finalMessage);
             }
         } else {
-            player1.sendMessage(YAMLMessage);
+           if(toAll) {
+               for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                   onlinePlayer.sendMessage(YAMLMessage);
+               }
+           } else {
+               player1.sendMessage(YAMLMessage);
+           }
         }
     }
 }

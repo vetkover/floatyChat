@@ -26,9 +26,9 @@ public class onPlayerJoin implements Listener {
 
         if(userJSON != null && !userJSON.getBoolean("notFirstEnter") && (boolean) readYaml("enableFirstGreeting")){
             JsonWork.editOneJson(nickname, "notFirstEnter", true);
-            YamlWork.formatingYaml(player1, readYaml("firstGreetingMessage"));
+            YamlWork.formatingYaml(player1, readYaml("firstGreetingMessage"), false);
         } else if (userJSON != null && (boolean) readYaml("enableGreeting")){
-            YamlWork.formatingYaml(player1, readYaml("greetingMessage"));
+            YamlWork.formatingYaml(player1, readYaml("greetingMessage"), false);
         }
         event.setJoinMessage(null);
     }
