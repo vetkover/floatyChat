@@ -23,7 +23,7 @@ plugin/FloatyChat/config.yaml
 | privateMessageByDefault| boolean| enable private message for all players bypassing LuckPerms |
 | localChatRange        | int     | value of local chat coverage distance |
 |intervalTimerMessages|int|value in seconds in the intervals between sending ads on the server|
-| mutePunish| int value in second of mute duration|
+| mutePunish| int |value in second of mute duration| 
 |globalChatSymbol| string | symbol to denote send message to global chat |
 | globalChatPrefix  | string  | global message chat prefix|
 | localChatPrefix   | string  | local message chat prefix|
@@ -76,4 +76,4 @@ __TimerMessages__ example:
 
 input<= - Check out the candy shop in stall number 3 at spawn
 
-output=> [advers] Check out the candy shop in stall number 3 at spawn
+output=> Check out the candy shop in stall number 3 at spawn
