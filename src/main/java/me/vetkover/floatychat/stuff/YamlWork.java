@@ -40,6 +40,7 @@ public class YamlWork {
             writer.write("privateMessageByDefault: true\n");
 
             writer.write("localChatRange: 40\n");
+            writer.write(("intervalTimerMessages: 1800\n"));
             writer.write("mutePunish: 3600\n");
 
             writer.write("globalChatSymbol: !\n");
@@ -48,7 +49,7 @@ public class YamlWork {
 
             writer.write("greetingMessage: welcome back §6{nickname1}§f, now on server {time:?format=h:mm a}. See ya on our site {URL:?text=click?url=https://sitexample.com}!\n");
             writer.write("firstGreetingMessage: welcome {nickname1}, now on server {time}. Check our site {URL:?text=click?url=https://sitexample.com}\n");
-            writer.write("customDeathMessage: {nickname1} killed a {nickname2}\n");
+            writer.write("customDeathMessage: WARNING {nickname1} killed a {nickname2}\n");
 
             writer.write("TimerMessages:\n");
             writer.write(" - example string 1\n");

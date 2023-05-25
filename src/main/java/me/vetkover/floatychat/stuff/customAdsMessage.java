@@ -30,7 +30,7 @@ public class customAdsMessage {
                         messageIndex.set(0);
                     }
                 };
-                ScheduledFuture<?> scheduledFuture = ses.scheduleAtFixedRate(task1, 5, 10, TimeUnit.SECONDS);
+                ScheduledFuture<?> scheduledFuture = ses.scheduleAtFixedRate(task1, 5, ( (Integer) readYaml("intervalTimerMessages")), TimeUnit.SECONDS);
             }
         }
     }
